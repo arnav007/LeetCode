@@ -8,7 +8,19 @@ class Solution {
         if(s%2 !=0) return false;
 
         s/=2;
-        return canSum(nums, s, 0, new Boolean[nums.length+1][s+1]);
+        // return canSum(nums, s, 0, new Boolean[nums.length+1][s+1]);
+
+
+        // 2
+        boolean[] res = new boolean[s+1];
+        res[0] = true;
+        for(int n: nums){
+            for(int i = s; i>=n; i--){
+                res[i] = res[i] || res[i-n];
+            }
+        }
+
+        return res[s];
     }
 
     boolean canSum(int[] nums, int sum, int i, Boolean[][] ans){
